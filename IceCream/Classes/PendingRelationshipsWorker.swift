@@ -28,6 +28,8 @@ final class PendingRelationshipsWorker<Element: Object> {
             for (primaryKeyValue, (propName, owner)) in self.pendingListElementPrimaryKeyValue {
                 guard let list = owner.value(forKey: propName) as? List<Element> else { return }
                 if let existListElementObject = realm.object(ofType: Element.self, forPrimaryKey: primaryKeyValue) {
+                    // Prevent duplicates in list
+                    guard let _ = list.firstIndex(of: existListElementObject) else { continue }
                     try! realm.write {
                         list.append(existListElementObject)
                     }
