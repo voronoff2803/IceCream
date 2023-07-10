@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/realm/realm-swift",
-            from: "10.37.0"
+            from: "10.41.0"
         )
     ],
     targets: [
